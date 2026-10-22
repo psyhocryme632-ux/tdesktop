@@ -65,7 +65,7 @@ rpl::producer<TextWithEntities> Text3() {
 } // namespace
 
 void AboutBox(not_null<Ui::GenericBox*> box) {
-	box->setTitle(u"64Gram Desktop"_q);
+	box->setTitle(u"Unixgram Desktop"_q);
 
 	auto layout = box->verticalLayout();
 
@@ -123,6 +123,12 @@ void AboutBox(not_null<Ui::GenericBox*> box) {
 		label->setLinksTrusted();
 		Ui::AddSkip(layout, st::aboutSkip);
 	};
+
+		const auto devLabel = layout->add(
+		object_ptr<Ui::FlatLabel>(box, rpl::single(Ui::Text::Link(u"Разработчик: @X"_q, u"https://t.me/X"_q)), st::aboutLabel),
+		st::boxRowPadding);
+	devLabel->setLinksTrusted();
+	Ui::AddSkip(layout, st::aboutSkip);
 
 	addText(Text1());
 	addText(Text2());
