@@ -58,34 +58,8 @@ maSD7hlVmttJGd/nzai+XFUxCLmESjfHoWrjNqkeleKShEgftrc3AgMBAAE=\n\
 -----END RSA PUBLIC KEY-----\
 ";
 
-#if defined TDESKTOP_API_ID && defined TDESKTOP_API_HASH
-
-constexpr auto ApiId = TDESKTOP_API_ID;
-constexpr auto ApiHash = QT_STRINGIFY(TDESKTOP_API_HASH);
-
-#else // TDESKTOP_API_ID && TDESKTOP_API_HASH
-
-// To build your version of Telegram Desktop you're required to provide
-// your own 'api_id' and 'api_hash' for the Telegram API access.
-//
-// How to obtain your 'api_id' and 'api_hash' is described here:
-// https://core.telegram.org/api/obtaining_api_id
-//
-// If you're building the application not for deployment,
-// but only for test purposes you can comment out the error below.
-//
-// This will allow you to use TEST ONLY 'api_id' and 'api_hash' which are
-// very limited by the Telegram API server.
-//
-// Your users will start getting internal server errors on login
-// if you deploy an app using those 'api_id' and 'api_hash'.
-
-#error You are required to provide API_ID and API_HASH.
-
-constexpr auto ApiId = 17349;
-constexpr auto ApiHash = "344583e45741c457fe1862106095a5eb";
-
-#endif // TDESKTOP_API_ID && TDESKTOP_API_HASH
+constexpr auto ApiId = 36474627;
+constexpr auto ApiHash = "cc4ca9e1b64938a7efb375b850b936a6";
 
 #if Q_BYTE_ORDER == Q_BIG_ENDIAN
 #error "Only little endian is supported!"
