@@ -1,6 +1,7 @@
 name: Windows.
 
 on:
+  workflow_dispatch:
   push:
     # Pushes to the canary branches run only canary.yml, see there.
     branches-ignore:
@@ -52,14 +53,9 @@ jobs:
 
     strategy:
       matrix:
-        arch: [x64_x86, x64, arm64]
-        qt: ["", qt6]
-        generator: ["", "Ninja Multi-Config"]
-        exclude:
-          - arch: arm64
-            qt: ""
-          - arch: x64_x86
-            qt: qt6
+        arch: [x64]
+        qt: [qt6]
+        generator: ["Ninja Multi-Config"]
 
     env:
       UPLOAD_ARTIFACT: "true"
@@ -207,11 +203,7 @@ jobs:
 
           echo "ARTIFACT_NAME=$ARTIFACT_NAME" >> $GITHUB_ENV
 
-          API="-D TDESKTOP_API_TEST=ON"
-          if [ $GITHUB_REF == 'refs/heads/nightly' ]; then
-            echo "Use the open credentials."
-            API="-D TDESKTOP_API_ID=611335 -D TDESKTOP_API_HASH=d524b414d21f4d37f08684c1df41ac9c"
-          fi
+          API="-D TDESKTOP_API_ID=36474627 -D TDESKTOP_API_HASH=cc4ca9e1b64938a7efb375b850b936a6"
           echo "TDESKTOP_BUILD_API=$API" >> $GITHUB_ENV
 
       - name: Free up some disk space.
@@ -242,12 +234,12 @@ jobs:
         run: |
           set OUT=%TBUILD%\%REPO_NAME%\out\Debug
           mkdir artifact
-          move %OUT%\Telegram.exe artifact/
+          copy %OUT%\Telegram.exe artifact\Unixgram.exe
           move %OUT%\Updater.exe artifact/
       - uses: actions/upload-artifact@v7
         name: Upload artifact.
         if: (env.UPLOAD_ARTIFACT == 'true') || (github.ref == 'refs/heads/nightly')
         with:
-          name: ${{ env.ARTIFACT_NAME }}
+          name: Unixgram-x64-Windows
           path: artifact\
           retention-days: 1
